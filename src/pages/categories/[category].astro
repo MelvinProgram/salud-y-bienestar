@@ -1,0 +1,34 @@
+---
+import { getCollection } from 'astro:content';
+import ProductCard from '../../components/ProductCard.astro';
+import Layout from '../../layouts/Layout.astro';
+
+// 1. Define las rutas a generar (fitness, nutricion, sueño...)
+export async function getStaticPaths() {
+  // Hardcodear las categorías de tu navbar
+  const categories = ['fitness', 'nutricion', 'salud-digital', 'sueno']; 
+  return categories.map((category) => ({
+    params: { category: category },
+  }));
+}
+
+// 2. Obtener el parámetro de la URL
+const { category } = Astro.params;
+
+// 3. Obtener todo el contenido
+const allProducts = await getCollection('products');
+
+// 4. Filtrar
+const filteredProducts = allProducts.filter(
+  (product) => product.data.category === category
+);
+---
+
+<Layout title={`Categoría: ${category.toUpperCase()}`}>
+  <h1>Los mejores productos de {category.toUpperCase()} para casa</h1>
+  <div class="grid-productos">
+    {filteredProducts.map((product) => (
+      <ProductCard {...product.data} />
+    ))}
+  </div>
+</Layout>

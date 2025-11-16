@@ -12,18 +12,37 @@ Inside of your Astro project, you'll see the following folders and files:
 
 ```text
 /
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+salud-y-bienestar/
+├─ public/
+│  ├─ favicon.svg
+│  └─ images/
+├─ src/
+│  ├─ components/
+│  │  ├─ Header.astro
+│  │  ├─ Footer.astro
+│  │  ├─ ArticleCard.astro
+│  │  ├─ ProductCard.astro
+│  │  └─ NewsletterForm.astro
+│  ├─ layouts/
+│  │  ├─ BaseLayout.astro
+│  │  └─ ArticleLayout.astro
+│  ├─ pages/
+│  │  ├─ index.astro
+│  │  ├─ about.astro
+│  │  ├─ privacy.astro
+│  │  └─ categories/[category].astro
+│  ├─ content/
+│  │  ├─ articles/
+│  │  │  ├─ 2025-01-01-top-10-masajeadores.md
+│  │  │  ├─ 2025-01-05-gimnasio-en-casa.md
+│  │  │  └─ 2025-01-10-purificadores-aire.md
+│  │  └─ products/
+│  │     ├─ masajeador-xyz.md
+│  │     └─ purificador-abc.md
+│  └─ styles/
+│     └─ global.css
+├─ astro.config.mjs
+├─ package.json
 ```
 
 To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
