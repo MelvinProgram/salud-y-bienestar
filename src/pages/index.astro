@@ -14,26 +14,26 @@ const productList = await getCollection('products');
 
 <Layout>
   <!-- La cabecera se está incluyendo dentro del Layout para un mejor control del diseño -->
-    <!-- <Header /> -->
-  <main class="flex flex-col justify-center py-12 px-4 sm:px-8">
-          <h1 class="text-3xl font-bold text-center mb-10 text-gray-800">
-              Los mejores productos para tu Bienestar en Casa
-          </h1>
-      
-          <!-- 3. Contenedor de la cuadrícula de productos -->
-          <!-- Usaremos una cuadrícula responsiva de Tailwind para que se vea bien en todos los tamaños -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-items-center">
-          {productList.map((product: CollectionEntry<'products'>) => (
-          <ProductCard 
+  <Header />
+    <main class="flex flex-col justify-center py-12 px-4 sm:px-8">
+            <h1 class="text-3xl font-bold text-center mb-10 text-gray-800">
+                Los mejores productos para tu Bienestar en Casa
+            </h1>
+        
+            <!-- 3. Contenedor de la cuadrícula de productos -->
+            <!-- Usaremos una cuadrícula responsiva de Tailwind para que se vea bien en todos los tamaños -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-items-center">
+            {productList.map((product: CollectionEntry<'products'>) => (
+            <ProductCard 
 
-            title={product.data.title} 
-            description={product.data.description}
-            image={product.data.image}
-            amazonLink={product.data.amazonLink}
-                      category={product.data.category}
-            />
-          ))}
-        </div>
-  </main>
+              title={product.data.title} 
+              description={product.data.description}
+              image={product.data.image}
+              amazonLink={product.data.amazonLink}
+                        category={product.data.category}
+              />
+            ))}
+          </div>
+    </main>
   <Footer />
   </Layout>

@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 import ProductCard from '../../components/ProductCard.astro';
 import Layout from '../../layouts/Layout.astro';
 
@@ -19,8 +19,10 @@ const { category } = Astro.params;
 const allProducts = await getCollection('products');
 
 // 4. Filtrar
-const filteredProducts = allProducts.filter(
-  (product) => product.data.category === category
+// Usa CollectionEntry<'nombreDeTuColeccion'> para tipar el array
+const filteredProducts: CollectionEntry<'products'>[] = allProducts.filter(
+    // 23. Ahora 'product' ya no es 'any' implícito, sino CollectionEntry<'products'>
+    (product) => product.data.category === category 
 );
 ---
 

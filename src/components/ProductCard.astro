@@ -27,9 +27,9 @@ const { title, description, image, amazonLink, category } = Astro.props;
   </div>
 
   <div class="content-body p-4">
-    <!-- <span class="text-xs font-semibold uppercase text-teal-600 mb-1 block">
+    <span class="text-xs font-semibold uppercase text-teal-600 mb-1 block">
       {category.replace('-', ' ')}
-    </span> -->
+    </span>
     
     <h3 class="text-lg font-bold text-gray-900 leading-snug mb-2">
       {title}
@@ -37,6 +37,10 @@ const { title, description, image, amazonLink, category } = Astro.props;
 
     <p class="text-sm text-gray-500 mb-4 h-12 overflow-hidden">
       {description}
+    </p>
+
+    <p class="text-sm text-gray-500 mb-4">
+      {category}
     </p>
 
     <a 
