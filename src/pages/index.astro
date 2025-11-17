@@ -5,6 +5,17 @@ import ProductCard from '../components/ProductCard.astro';
 import Layout from '../layouts/Layout.astro';
 import '../styles/global.css';
 
+import type { ArticleEntry } from "../types/Article";
+import ArticleCard from "../components/ArticleCard.astro";
+
+// Obtener todos los artículos
+const allArticles: ArticleEntry[] = await getCollection("articles");
+
+// Opcional: ordenar por fecha descendente
+const articlesSorted = allArticles.sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+);
+
 // 1. IMPORTAR EL TIPO DE COLECCIÓN
 import { getCollection, type CollectionEntry } from 'astro:content';
 
@@ -15,13 +26,21 @@ const productList = await getCollection('products');
 <Layout>
   <!-- La cabecera se está incluyendo dentro del Layout para un mejor control del diseño -->
   <Header />
-    <main class="flex flex-col justify-center py-12 px-4 sm:px-8">
+  <h1 class="text-2xl font-bold mb-6">Últimos artículos</h1>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    {articlesSorted.map((article) => (
+      <ArticleCard {...article.data} slug={article.slug} />
+    ))}
+  </div>
+  
+    <!-- <main class="flex flex-col justify-center py-12 px-4 sm:px-8">
             <h1 class="text-3xl font-bold text-center mb-10 text-gray-800">
                 Los mejores productos para tu Bienestar en Casa
             </h1>
         
-            <!-- 3. Contenedor de la cuadrícula de productos -->
-            <!-- Usaremos una cuadrícula responsiva de Tailwind para que se vea bien en todos los tamaños -->
+            3. Contenedor de la cuadrícula de productos
+            Usaremos una cuadrícula responsiva de Tailwind para que se vea bien en todos los tamaños
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-items-center">
             {productList.map((product: CollectionEntry<'products'>) => (
             <ProductCard 
@@ -34,6 +53,6 @@ const productList = await getCollection('products');
               />
             ))}
           </div>
-    </main>
+    </main> -->
   <Footer />
   </Layout>

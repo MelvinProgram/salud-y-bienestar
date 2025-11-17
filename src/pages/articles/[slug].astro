@@ -1,0 +1,47 @@
+---
+import { getEntryBySlug, getCollection } from "astro:content";
+import type { ArticleEntry } from "../../types/Article";
+import Layout from "../../layouts/ArticleLayout.astro";
+
+export async function getStaticPaths() {
+  const allArticles: ArticleEntry[] = await getCollection("articles");
+  return allArticles.map((article) => ({
+    params: { slug: article.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+
+const article: ArticleEntry | undefined = await getEntryBySlug(
+  "articles",
+  slug
+);
+
+if (!article) {
+  throw new Error(`No se encontró el artículo con slug: ${slug}`);
+}
+
+const { title, excerpt, date, image, category, author } = article.data;
+
+const formattedDate = date.toLocaleDateString("es-ES", {
+  year: "numeric",
+  month: "short",
+  day: "numeric",
+});
+---
+<Layout title={title}>
+  <article class="prose mx-auto py-8">
+    <h1>{title}</h1>
+    <span class="text-xs text-gray-500">
+      {formattedDate} • {category} {author ? `• por ${author}` : ""}
+    </span>
+
+    <img src={image} alt={title} class="my-6 w-full rounded-lg" />
+
+    <p>{excerpt}</p>
+
+    <div class="mt-6">
+      <slot /> <!-- Aquí puedes renderizar contenido Markdown adicional si quieres -->
+    </div>
+  </article>
+</Layout>

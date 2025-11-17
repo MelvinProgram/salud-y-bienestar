@@ -1,19 +1,12 @@
 ---
-// src/components/ProductCard.astro
+import type { Product } from "../types/Product";
 
-// 1. Definición de las Props (Propiedades que vienen del Frontmatter del .md)
-interface Props {
-  title: string;
-  description: string;
-  image: string; // Ruta de la imagen del producto
-  amazonLink: string; // ¡El enlace de afiliado crucial!
-  category: string;
-  // Opcional: slug se usaría para enlazar a la reseña completa, si la creas
-  // slug?: string; 
-}
+const props = Astro.props as Product;
 
-const { title, description, image, amazonLink, category } = Astro.props;
+const { title, description, image, price, category, amazonLink } = props;
 ---
+
+
 
 <article class="product-card bg-white border border-gray-200 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
   
@@ -43,23 +36,15 @@ const { title, description, image, amazonLink, category } = Astro.props;
       {category}
     </p>
 
-    <a 
-      href={amazonLink} 
-      target="_blank" 
-      rel="noopener noreferrer" 
-      class="amazon-button w-full flex items-center justify-center px-4 py-2 text-white font-bold rounded-lg transition-colors duration-200"
-    >
-      🛒 Comprar en Amazon
-    </a>
+    🛒 Comprar en Amazon
   </div>
 </article>
 
 <style>
-  /* Estilos para el botón de afiliado de Amazon */
   .amazon-button {
-    background-color: #ff9900; /* Color principal de Amazon (Naranja) */
+    background-color: #ff9900;
   }
   .amazon-button:hover {
-    background-color: #e68a00; /* Naranja más oscuro al pasar el ratón */
+    background-color: #e68a00;
   }
 </style>

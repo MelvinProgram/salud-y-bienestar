@@ -1,52 +1,49 @@
 ---
-// const {title, excerpt, url, date} = Astro.props
+import type { Article } from "../types/Article";
 
+// Tipar props
+const props = Astro.props as Article;
 
-// src/components/ArticleCard.astro
+// Destructurar
+const { title, excerpt, image, date, category } = props;
 
-// Agregamos image y category para una mejor presentación
-const { title, excerpt, url, date, image, category } = Astro.props; 
-// Opcional: formatear la fecha para que se vea bien
-const formattedDate = date.toLocaleDateString('es-ES', { 
-    year: 'numeric', 
-    month: 'short', 
-    day: 'numeric' 
+// Formatear fecha
+const formattedDate = date.toLocaleDateString("es-ES", {
+  year: "numeric",
+  month: "short",
+  day: "numeric",
 });
-
 ---
-<article class="bg-indigo-500/50 w-[250px] h-[150px] p-0 my-5 border rounded">
-    <a href={url} class="block">
-        <h3 class="font-semibold">{title}</h3>
-        <p class="text-sm text-gray-600">{excerpt}</p>
+<article class="bg-white border rounded-xl shadow-sm overflow-hidden hover:shadow-md transition">
+  <a href={`/articles/${props.slug}`} class="block">
+    <img 
+      src={image}
+      alt={title}
+      class="w-full h-40 object-cover"
+      loading="lazy"
+    />
+  </a>
+
+  <div class="p-4">
+    <span class="text-xs font-bold uppercase text-indigo-600 mb-1 block">
+      {category}
+    </span>
+
+    <a href={`/articles/${props.slug}`} class="block hover:text-indigo-700 transition duration-150">
+      <h3 class="font-semibold text-lg leading-tight mb-2">
+        {title}
+      </h3>
     </a>
-</article>
 
-<div class="p-4">
-        <span class="text-xs font-bold uppercase text-indigo-600 mb-1 block">
-            {category}
-        </span>
+    <p class="text-sm text-gray-600 mb-3">
+      {excerpt}
+    </p>
 
-        <a href={url} class="block hover:text-indigo-700 transition duration-150">
-            <h3 class="font-semibold text-lg leading-tight mb-2">
-                {title}
-            </h3>
-        </a>
-
-        <p class="text-sm text-gray-600 mb-3">
-            {excerpt}
-        </p>
-
-        <div class="flex justify-between items-center text-xs text-gray-400">
-            <span>{formattedDate}</span>
-            <a href={url} class="text-indigo-500 hover:text-indigo-700 font-medium">Leer Más →</a>
-        </div>
+    <div class="flex justify-between items-center text-xs text-gray-400">
+      <span>{formattedDate}</span>
+      <a href={`/articles/${props.slug}`} class="text-indigo-500 hover:text-indigo-700 font-medium">
+        Leer Más →
+      </a>
     </div>
+  </div>
 </article>
-
-<style>
-/* Estilos personalizados si es necesario, pero Tailwind hace la mayor parte del trabajo */
-.article-card {
-    background-color: white; /* Sobrescribir el bg-indigo-500/50 del ejemplo */
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
-}
-</style>

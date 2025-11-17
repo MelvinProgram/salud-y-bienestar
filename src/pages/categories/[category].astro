@@ -1,30 +1,25 @@
 ---
-import { getCollection, type CollectionEntry } from 'astro:content';
+// src/pages/categories/[category].astro
+import { getCollection } from 'astro:content';
+import type { ProductEntry } from '../../types/Product';
 import ProductCard from '../../components/ProductCard.astro';
 import Layout from '../../layouts/Layout.astro';
 
-// 1. Define las rutas a generar (fitness, nutricion, sueño...)
+// Definimos todas las rutas válidas
 export async function getStaticPaths() {
-  // Hardcodear las categorías de tu navbar
-  const categories = ['fitness', 'nutricion', 'salud-digital', 'sueno']; 
-  return categories.map((category) => ({
-    params: { category: category },
-  }));
+  const categories = ['fitness', 'nutricion', 'salud-digital', 'sueno'];
+  return categories.map((category) => ({ params: { category } }));
 }
 
-// 2. Obtener el parámetro de la URL
 const { category } = Astro.params;
 
-// 3. Obtener todo el contenido
-const allProducts = await getCollection('products');
+const allProducts: ProductEntry[] = await getCollection('products');
 
-// 4. Filtrar
-// Usa CollectionEntry<'nombreDeTuColeccion'> para tipar el array
-const filteredProducts: CollectionEntry<'products'>[] = allProducts.filter(
-    // 23. Ahora 'product' ya no es 'any' implícito, sino CollectionEntry<'products'>
-    (product) => product.data.category === category 
+const filteredProducts = allProducts.filter(
+  (product) => product.data.category === category
 );
 ---
+
 
 <Layout title={`Categoría: ${category.toUpperCase()}`}>
   <h1>Los mejores productos de {category.toUpperCase()} para casa</h1>
