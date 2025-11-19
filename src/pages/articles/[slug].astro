@@ -1,10 +1,10 @@
 ---
-import { getEntryBySlug, getCollection } from "astro:content";
-import type { ArticleEntry } from "../../types/Article";
+// src/pages/articles/[slug].astro
+import { getEntry, getCollection, type CollectionEntry } from "astro:content";
 import Layout from "../../layouts/ArticleLayout.astro";
 
 export async function getStaticPaths() {
-  const allArticles: ArticleEntry[] = await getCollection("articles");
+  const allArticles = await getCollection("articles");
   return allArticles.map((article) => ({
     params: { slug: article.slug },
   }));
@@ -12,36 +12,44 @@ export async function getStaticPaths() {
 
 const { slug } = Astro.params;
 
-const article: ArticleEntry | undefined = await getEntryBySlug(
-  "articles",
-  slug
-);
+// usar getEntry (devuelve CollectionEntry | null)
+const entry = await getEntry("articles", slug);
 
-if (!article) {
+if (!entry) {
+  // Devuelve 404 en vez de tirar error en producción
   throw new Error(`No se encontró el artículo con slug: ${slug}`);
 }
 
-const { title, excerpt, date, image, category, author } = article.data;
+// entry ya tiene .data y .slug
+const article = entry as CollectionEntry<"articles">;
 
-const formattedDate = date.toLocaleDateString("es-ES", {
+const { title, date, image, category, author } = article.data;
+
+// asegurar que date es Date
+const formattedDate = (date instanceof Date ? date : new Date(date)).toLocaleDateString("es-ES", {
   year: "numeric",
   month: "short",
   day: "numeric",
 });
+
+// renderizar contenido Markdown del entry
+const { Content } = await entry.render();
 ---
+
 <Layout title={title}>
   <article class="prose mx-auto py-8">
     <h1>{title}</h1>
+
     <span class="text-xs text-gray-500">
       {formattedDate} • {category} {author ? `• por ${author}` : ""}
     </span>
 
-    <img src={image} alt={title} class="my-6 w-full rounded-lg" />
+    {image && <img src={image} alt={title} class="my-6 w-full rounded-lg" />}
 
-    <p>{excerpt}</p>
+    <!-- {excerpt && <p>{excerpt}</p>} -->
 
     <div class="mt-6">
-      <slot /> <!-- Aquí puedes renderizar contenido Markdown adicional si quieres -->
+      <Content />
     </div>
   </article>
 </Layout>

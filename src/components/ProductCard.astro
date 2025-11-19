@@ -2,11 +2,8 @@
 import type { Product } from "../types/Product";
 
 const props = Astro.props as Product;
-
 const { title, description, image, price, category, amazonLink } = props;
 ---
-
-
 
 <article class="product-card bg-white border border-gray-200 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
   
@@ -32,17 +29,25 @@ const { title, description, image, price, category, amazonLink } = props;
       {description}
     </p>
 
-    <p class="text-sm text-gray-500 mb-4">
-      {category}
+    <p class="text-lg font-semibold text-gray-900 mb-4">
+      ${price}
     </p>
 
-    🛒 Comprar en Amazon
+    <a 
+      href={amazonLink} 
+      target="_blank" 
+      rel="noopener noreferrer"
+      class="amazon-button text-white font-semibold py-2 px-4 rounded-lg inline-flex items-center"
+    >
+      🛒 Comprar en Amazon
+    </a>
   </div>
 </article>
 
 <style>
   .amazon-button {
     background-color: #ff9900;
+    transition: background-color 0.2s;
   }
   .amazon-button:hover {
     background-color: #e68a00;

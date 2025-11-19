@@ -34,13 +34,13 @@ const productList = await getCollection('products');
     ))}
   </div>
   
-    <!-- <main class="flex flex-col justify-center py-12 px-4 sm:px-8">
+    <main class="flex flex-col justify-center py-12 px-4 sm:px-8">
             <h1 class="text-3xl font-bold text-center mb-10 text-gray-800">
                 Los mejores productos para tu Bienestar en Casa
             </h1>
         
-            3. Contenedor de la cuadrícula de productos
-            Usaremos una cuadrícula responsiva de Tailwind para que se vea bien en todos los tamaños
+            <!-- 3. Contenedor de la cuadrícula de productos
+            Usaremos una cuadrícula responsiva de Tailwind para que se vea bien en todos los tamaños -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-items-center">
             {productList.map((product: CollectionEntry<'products'>) => (
             <ProductCard 
@@ -53,6 +53,6 @@ const productList = await getCollection('products');
               />
             ))}
           </div>
-    </main> -->
+    </main>
   <Footer />
   </Layout>

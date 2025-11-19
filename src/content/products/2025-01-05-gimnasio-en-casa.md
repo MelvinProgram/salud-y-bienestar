@@ -1,9 +1,8 @@
 ---
-title: "Cómo montar un gimnasio en casa con menos de 200€"
-date: 2025-01-05
-category: fitness
-description: "Guía práctica para crear tu propio espacio de entrenamiento sin gastar una fortuna"
+title: "Top 10 masajeadores para relajarte"
+description: "Una selección de los mejores masajeadores para cuello, espalda y cuerpo."
+price: 49.99
+image: "https://images.pexels.com/photos/5327474/pexels-photo-5327474.jpeg"
+category: "salud-digital"
+amazonLink: "https://amazon.com/..."
 ---
-
-
-Montar un gimnasio en casa no tiene por qué ser caro. Aquí te mostramos los elementos esenciales...
