@@ -1,0 +1,25 @@
+---
+const productUrl = Astro.site ? new URL(Astro.request.url).toString() : '';
+const jsonLd = {
+  "@context": "https://schema.org/",
+  "@type": "Product",
+  "name": title,
+  "image": image ? [image] : [],
+  "description": excerpt ?? "",
+  "sku": data.asin ?? "",
+  "brand": {
+    "@type": "Brand",
+    "name": data.brand ?? ""
+  },
+  "offers": {
+    "@type": "Offer",
+    "url": affiliateUrl,
+    "priceCurrency": data.currency ?? "EUR",
+    "price": data.price ?? "",
+    "availability": "https://schema.org/InStock"
+  }
+};
+---
+<head>
+  <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+</head>

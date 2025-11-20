@@ -1,13 +1,12 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import ProductCard from '../components/ProductCard.astro';
+// import ProductCard from '../components/ProductCard.astro';
 import Layout from '../layouts/Layout.astro';
 import '../styles/global.css';
-
 import type { ArticleEntry } from "../types/Article";
 import ArticleCard from "../components/ArticleCard.astro";
-
+import SectionCard from '../components/SectionCard.astro';
 // Obtener todos los artículos
 const allArticles: ArticleEntry[] = await getCollection("articles");
 
@@ -26,33 +25,81 @@ const productList = await getCollection('products');
 <Layout>
   <!-- La cabecera se está incluyendo dentro del Layout para un mejor control del diseño -->
   <Header />
-  <h1 class="text-2xl font-bold mb-6">Últimos artículos</h1>
+  <main class="flex flex-col justify-center py-12 px-4 sm:px-8">
+      <h1 class="text-3xl font-bold text-center mb-10 text-gray-800">
+          Los mejores productos para tu Bienestar en Casa
+      </h1>
+      <SectionCard>
+        <h2 class="text-4xl font-bold mb-4">Fitness</h2>
+        <p class="text-lg opacity-90 mb-4">
+        Mantener tu cuerpo activo es esencial para mejorar tu energía, estado de ánimo y bienestar general. El sedentarismo afecta tu salud, pero con pequeños pasos desde casa puedes transformar por completo tu día a día.
+        </p>
+        <p class="text-lg opacity-90 mb-6">
+        No necesitas un gimnasio para empezar. Con rutinas simples y el equipo adecuado, puedes construir fuerza, flexibilidad y resistencia desde tu hogar.
+        </p>
+        <a href="#" class="inline-block bg-blue-600 hover:bg-blue-700 transition px-6 py-3 rounded-xl font-semibold">Ver herramientas recomendadas</a>
+      </SectionCard>
 
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-    {articlesSorted.map((article) => (
-      <ArticleCard {...article.data} slug={article.slug} />
-    ))}
-  </div>
-  
-    <main class="flex flex-col justify-center py-12 px-4 sm:px-8">
-            <h1 class="text-3xl font-bold text-center mb-10 text-gray-800">
-                Los mejores productos para tu Bienestar en Casa
-            </h1>
+      <!-- Sección Salud Digital -->
+      <SectionCard>
+        <h2 class="text-4xl font-bold mb-4">Salud Digital</h2>
+        <p class="text-lg opacity-90 mb-4">
+          La tecnología te permite conocer mejor tu cuerpo: medir tu actividad, tu frecuencia cardíaca, tus niveles de estrés y tu calidad de sueño. Con datos reales puedes crear hábitos más saludables y tomar decisiones más inteligentes.
+        </p>
+        <p class="text-lg opacity-90 mb-6">
+          Relojes inteligentes, básculas digitales y apps de seguimiento son aliados perfectos para mejorar tu bienestar desde casa.
+        </p>
+        <a href="#" class="inline-block bg-blue-600 hover:bg-blue-700 transition px-6 py-3 rounded-xl font-semibold">Explorar dispositivos</a>
+      </SectionCard>
+
+      <!-- Sección Nutrición  -->
+      <SectionCard>
+        <h2 class="text-4xl font-bold mb-4">Nutrición</h2>
+        <p class="text-lg opacity-90 mb-4">
+          Lo que comes define tu energía, tu mente y tu bienestar a largo plazo. Una alimentación consciente puede transformar tu salud desde adentro hacia afuera.
+        </p>
+        <p class="text-lg opacity-90 mb-6">
+          Con herramientas adecuadas en tu cocina y una buena organización, puedes crear hábitos alimenticios más saludables sin complicaciones.
+        </p>
+        <a href="#" class="inline-block bg-blue-600 hover:bg-blue-700 transition px-6 py-3 rounded-xl font-semibold">Productos para mejorar tu nutrición</a>
+      </SectionCard>
+
+      <!-- Sección Sueño -->
+      <SectionCard>
+        <h2 class="text-4xl font-bold mb-4">Sueño</h2>
+        <p class="text-lg opacity-90 mb-4">
+          Dormir bien es clave para tu rendimiento, tu estado emocional y tu salud. Un descanso adecuado fortalece tu sistema inmunológico y mejora tu equilibrio diario.
+        </p>
+        <p class="text-lg opacity-90 mb-6">
+          Con ajustes simples en tu entorno —como controlar la luz, el ruido y la temperatura— puedes mejorar drásticamente la calidad de tu sueño.
+        </p>
+        <a href="#" class="inline-block bg-blue-600 hover:bg-blue-700 transition px-6 py-3 rounded-xl font-semibold">Optimiza tu descanso</a>
+      </SectionCard>
+
+      
+          <!-- 3. Contenedor de la cuadrícula de productos
+          Usaremos una cuadrícula responsiva de Tailwind para que se vea bien en todos los tamaños -->
+          <!-- <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-items-center">
+          {productList.map((product: CollectionEntry<'products'>) => (
+          <ProductCard 
+
+            title={product.data.title} 
+            description={product.data.description}
+            image={product.data.image}
+            amazonLink={product.data.amazonLink}
+                      category={product.data.category}
+            />
+          ))}
+        </div>
         
-            <!-- 3. Contenedor de la cuadrícula de productos
-            Usaremos una cuadrícula responsiva de Tailwind para que se vea bien en todos los tamaños -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-items-center">
-            {productList.map((product: CollectionEntry<'products'>) => (
-            <ProductCard 
+        -->
+        <h1 class="text-2xl font-bold mb-6">Últimos artículos</h1>
 
-              title={product.data.title} 
-              description={product.data.description}
-              image={product.data.image}
-              amazonLink={product.data.amazonLink}
-                        category={product.data.category}
-              />
-            ))}
-          </div>
-    </main>
-  <Footer />
-  </Layout>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mx-5">
+          {articlesSorted.map((article) => (
+            <ArticleCard {...article.data} slug={article.slug} />
+          ))}
+        </div>
+  </main> 
+    <Footer />
+</Layout>
