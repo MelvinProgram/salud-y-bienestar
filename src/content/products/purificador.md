@@ -1,11 +1,12 @@
 ---
 title: "Purificador ABC"
 description: "Purificador de aire con filtro HEPA..."
-image: "/images/purificador-abc.jpg"
+price: 49.99
+image: "../assets/images/fitness.png"
 asin: "B09XXXXXXX"
-category: "Hogar"
-price: "99.99"
-currency: "EUR"
+category: "salud-digital"
+amazonLink: "https://amazon.com/..."
+
 ---
 Contenido del producto...
 

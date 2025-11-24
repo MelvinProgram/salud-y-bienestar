@@ -19,19 +19,19 @@ const productsCollection = defineCollection({
 });
 
 // 📝 Colección de artículos
-const articlesCollection = defineCollection({
-  type: 'content',
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
-    date: z.date(),
-    image: z.string(),
-    category: z.enum(["fitness", "nutricion", "salud-digital", "sueno"]),
-    author: z.string().optional(),
-  }),
-});
+// const articlesCollection = defineCollection({
+//   type: 'content',
+//   schema: z.object({
+//     title: z.string(),
+//     description: z.string(),
+//     date: z.date(),
+//     image: z.string(),
+//     category: z.enum(["fitness", "nutricion", "salud-digital", "sueno"]),
+//     author: z.string().optional(),
+//   }),
+// });
 
 export const collections = {
   products: productsCollection,
-  articles: articlesCollection,
+  // articles: articlesCollection,
 };

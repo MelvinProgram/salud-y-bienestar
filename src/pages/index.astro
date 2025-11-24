@@ -5,7 +5,7 @@ import Footer from '../components/Footer.astro';
 import Layout from '../layouts/Layout.astro';
 import '../styles/global.css';
 import type { ArticleEntry } from "../types/Article";
-import ArticleCard from "../components/ArticleCard.astro";
+// import ArticleCard from "../components/ArticleCard.astro";
 import SectionCard from '../components/SectionCard.astro';
 import Carrusel from '../components/Carrusel.astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
@@ -13,7 +13,7 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 // Obtener artículos y productos
 const allArticles: ArticleEntry[] = await getCollection("articles");
 const articlesSorted = allArticles.sort(
-  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+  // (a, b) => b.data.date.getTime() - a.data.date.getTime()
 );
 const productList = await getCollection('products');
 
@@ -85,9 +85,9 @@ const productList = await getCollection('products');
       <!-- Últimos artículos -->
       <h1 class="text-2xl font-bold mb-6 text-light">Últimos artículos</h1>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mx-5">
-        {articlesSorted.map((article) => (
+        <!-- {articlesSorted.map((article) => (
           <ArticleCard {...article.data} slug={article.slug} />
-        ))}
+        ))} -->
       </div>
   </main>
   <Footer />
