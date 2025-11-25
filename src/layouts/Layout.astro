@@ -1,13 +1,14 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" class="bg-dark text-light">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Logra Tú Wellness</title>
+		<meta name="description" content="Descubre consejos y productos recomendados para fitness, nutrición, salud digital y sueño. Mejora tu bienestar desde casa.">
+		<title>Logra Tú Wellness | Mejora tu rutina desde casa</title>
 	</head>
-	<body class="bg-white text-gray-800 antialiased;">
+	<body class="text-gray-800 antialiased; bg-dark min-h-screen">
 		<slot />
 	</body>
 </html>
@@ -15,10 +16,12 @@
 <style>
 	html,
 	body {
+		background-color: var(--color-dark);
+		color: var(--text-light);
+		font-family: system-ui, sans-serif;
 		margin: 0;
-		width: 100%;
-		height: 100%;
-		font-family:Verdana, Geneva, Tahoma, sans-serif;
+		padding: 0;
 		scroll-behavior: smooth;
+		/* color: var(--text-light); */
 	}
 </style>

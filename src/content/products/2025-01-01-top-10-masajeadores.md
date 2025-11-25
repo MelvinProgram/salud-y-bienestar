@@ -1,10 +1,12 @@
 ---
-title: "Top 10 Masajeadores"
-excerpt: "Descubre los mejores masajeadores para aliviar la tensión muscular en casa."
-date: 2025-01-01
-image: "/images/masajeador.png"
-category: "fitness"
-author: "Juan Pérez"
+
+title: "Top 10 masajeadores para relajarte"
+description: "Una selección de los mejores masajeadores para cuello, espalda y cuerpo."
+price: 49.99
+image: "https://images.pexels.com/photos/5327474/pexels-photo-5327474.jpeg"
+category: salud-digital
+amazonLink: "https://amazon.com/..."
+
 ---
 
 Contenido completo del artículo...
