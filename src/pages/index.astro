@@ -17,6 +17,13 @@ const articlesSorted = allArticles.sort(
 );
 const productList = await getCollection('products');
 
+const imgFitness = [
+  '/assets/images/fitness1.png',
+  '/assets/images/fitness2.png',
+  '/assets/images/fitness3.png',
+  '/assets/images/fitness4.png',
+];
+
 ---
 
 <Layout>
@@ -38,9 +45,7 @@ const productList = await getCollection('products');
         <a href="/categories/fitness" class="inline-block bg-primary hover:bg-secondary text-dark transition px-6 py-3 rounded-xl font-semibold">
           Ver herramientas recomendadas
         </a>
-        <Carrusel>
-          
-        </Carrusel>
+        <Carrusel images={imgFitness} />
       </SectionCard>
 
       <SectionCard >
