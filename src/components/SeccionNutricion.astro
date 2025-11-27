@@ -1,0 +1,23 @@
+---
+import Carrusel from './Carrusel.astro';
+
+const imagesNutricion = [
+    '/assets/images/nutricion/nutricion1.png',
+    '/assets/images/nutricion/nutricion2.png',
+    '/assets/images/nutricion/nutricion3.png',
+    '/assets/images/nutricion/nutricion4.png',
+];
+---
+<section class="py-20 px-6 max-w-5xl mx-auto animate-fadeIn bg-light text-dark rounded-2xl shadow-lg p-8 mb-10">
+    <h2 id="nutricion" class="text-4xl text-primary font-bold mb-4">Nutrición</h2>
+    <p class="text-lg text-dark opacity-90 mb-4">
+        Lo que comes define tu energía, tu mente y tu bienestar a largo plazo. Una alimentación consciente puede transformar tu salud desde adentro hacia afuera.
+    </p>
+    <p class="text-lg text-dark opacity-90 mb-6">
+        Con herramientas adecuadas en tu cocina y una buena organización, puedes crear hábitos alimenticios más saludables sin complicaciones.
+    </p>
+    <a href="/categories/nutricion" class="inline-block bg-primary hover:bg-secondary text-dark transition px-6 py-3 rounded-xl font-semibold">
+        Productos para mejorar tu nutrición
+    </a>
+    <Carrusel images={imagesNutricion} height="100%" />
+</section>

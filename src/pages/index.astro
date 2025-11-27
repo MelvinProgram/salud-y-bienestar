@@ -4,6 +4,8 @@
 import Header from '../components/Header.astro';
 import SeccionFitness from '../components/SeccionFitness.astro'
 import SeccionSaludDigital from '../components/SeccionSaludDigital.astro';
+import SeccionSueno from '../components/SeccionSueno.astro';
+import SeccionNutricion from '../components/SeccionNutricion.astro';
 import Footer from '../components/Footer.astro';
 import Layout from '../layouts/Layout.astro';
 import '../styles/global.css';
@@ -41,34 +43,10 @@ const articlesSorted = allArticles.sort(
       </SectionCard>
       <SeccionFitness />
       <SeccionSaludDigital />
+      <SeccionNutricion />
+      <SeccionSueno />
 
       <!-- Secciones con paleta Neo-Wellness -->
-      <SectionCard >
-        <h2 id="nutricion" class="text-4xl text-primary font-bold mb-4">Nutrición</h2>
-        <p class="text-lg text-dark opacity-90 mb-4">
-          Lo que comes define tu energía, tu mente y tu bienestar a largo plazo. Una alimentación consciente puede transformar tu salud desde adentro hacia afuera.
-        </p>
-        <p class="text-lg text-dark opacity-90 mb-6">
-          Con herramientas adecuadas en tu cocina y una buena organización, puedes crear hábitos alimenticios más saludables sin complicaciones.
-        </p>
-        <a href="/categories/nutricion" class="inline-block bg-primary hover:bg-secondary text-dark transition px-6 py-3 rounded-xl font-semibold">
-          Productos para mejorar tu nutrición
-        </a>
-      </SectionCard>
-
-      <SectionCard >
-        <h2 id="sueno" class="text-4xl text-primary font-bold mb-4">Sueño</h2>
-        <p class="text-lg text-dark opacity-90 mb-4">
-          Dormir bien es clave para tu rendimiento, tu estado emocional y tu salud. Un descanso adecuado fortalece tu sistema inmunológico y mejora tu equilibrio diario.
-        </p>
-        <p class="text-lg text-dark opacity-90 mb-6">
-          Con ajustes simples en tu entorno —como controlar la luz, el ruido y la temperatura— puedes mejorar drásticamente la calidad de tu sueño.
-        </p>
-        <a href="/categories/sueno" class="inline-block bg-primary hover:bg-secondary text-dark transition px-6 py-3 rounded-xl font-semibold">
-          Optimiza tu descanso
-        </a>
-        
-      </SectionCard>
 
       <!-- Últimos artículos -->
       <!-- <h1 class="text-2xl font-bold mb-6 text-light">Últimos artículos</h1>
