@@ -1,111 +1,199 @@
 ---
-
+const { images = [], height = "100%" } = Astro.props;
 ---
+<style>
+  /* estilos mínimos que no dependen de Tailwind build-time */
+  .carousel-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
 
-<div id="default-carousel" class="relative w-full py-5" data-carousel="slide">
-    <!-- Carousel wrapper -->
-    <div class="rounded-base">
-        <!-- Item 1 -->
-        <div class="hidden duration-700 ease-in-out" data-carousel-item>
-            <img src="/assets/images/fitness1.png" class="w-full object-cover rounded-2xl" alt="..." width="1024" height="768">
-        </div>
-        <!-- Item 2 -->
-        <div class="hidden duration-700 ease-in-out" data-carousel-item>
-            <img src="/assets/images/fitness2.png" class="w-full object-cover rounded-2xl" alt="..." width="1024" height="768">
-        </div>
-        <!-- Item 3 -->
-        <div class="duration-700 ease-in-out" data-carousel-item="active">
-            <img src="/assets/images/fitness3.png" class="w-full object-cover rounded-2xl" alt="..." width="1024" height="768">
-        </div>
-        <!-- Item 4 -->
-        <div class="hidden duration-700 ease-in-out" data-carousel-item>
-            <img src="/assets/images/fitness4.png" class="w-full object-cover rounded-2xl" alt="..." width="1024" height="768">
-        </div>
+  .carousel-track {
+    display: flex;
+    transition: transform 0.45s ease-in-out;
+    will-change: transform;
+  }
 
-    </div>
-    <!-- Slider indicators -->
-    <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
-        <button type="button" class="w-3 h-3 rounded-base" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
-        <button type="button" class="w-3 h-3 rounded-base" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
-        <button type="button" class="w-3 h-3 rounded-base" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
-        <button type="button" class="w-3 h-3 rounded-base" aria-current="false" aria-label="Slide 4" data-carousel-slide-to="3"></button>
-        <button type="button" class="w-3 h-3 rounded-base" aria-current="false" aria-label="Slide 5" data-carousel-slide-to="4"></button>
-    </div>
-    <!-- Slider controls -->
-    <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
-        <span class="inline-flex items-center justify-center w-10 h-10 rounded-base bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-            <svg class="w-5 h-5 text-white rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m15 19-7-7 7-7"/></svg>
-            <span class="sr-only">Previous</span>
-        </span>
-    </button>
-    <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
-        <span class="inline-flex items-center justify-center w-10 h-10 rounded-base bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-            <svg class="w-5 h-5 text-white rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 5 7 7-7 7"/></svg>
-            <span class="sr-only">Next</span>
-        </span>
-    </button>
+  .carousel-slide {
+    flex-shrink: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+</style>
+
+<div class="carousel-container shadow-lg shadow-black/50 rounded-3xl mt-8"
+     style={`height: ${height}`}
+     data-carousel>
+  <div class="carousel-track" data-carousel-track>
+    {images.map((img: string) => (
+      <img src={img} alt="slide" class="carousel-slide" />
+    ))}
+  </div>
+
+  <!-- Flechas: uso clases Tailwind aquí para evitar @apply dentro de <style> -->
+  <button type="button"
+          aria-label="Anterior"
+          class="absolute top-1/2 -translate-y-1/2 bg-black/40 text-white p-2 rounded-full cursor-pointer hover:bg-black/60 transition left-3"
+          data-prev>
+    ❮
+  </button>
+
+  <button type="button"
+          aria-label="Siguiente"
+          class="absolute top-1/2 -translate-y-1/2 bg-black/40 text-white p-2 rounded-full cursor-pointer hover:bg-black/60 transition right-3"
+          data-next>
+    ❯
+  </button>
+
+  <!-- Puntos -->
+  <div class="flex justify-center gap-2 absolute bottom-3 left-1/2 -translate-x-1/2" data-dots></div>
 </div>
 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-    const carousel = document.querySelector("#default-carousel") as HTMLElement;
-    
-    if (!carousel) {
-        console.error("Carrusel no encontrado");
+<script type="module">
+  (function () {
+    // seleccionar todos los carruseles en la página (permite múltiples)
+    const carousels = document.querySelectorAll('[data-carousel]');
+
+    carousels.forEach((root) => {
+      const track = root.querySelector('[data-carousel-track]');
+      const slides = track ? Array.from(track.children) : [];
+      const prevBtn = root.querySelector('[data-prev]');
+      const nextBtn = root.querySelector('[data-next]');
+      const dotsContainer = root.querySelector('[data-dots]');
+
+      if (!track || slides.length === 0) {
+        // nada que mostrar
+        if (dotsContainer) dotsContainer.style.display = 'none';
+        if (prevBtn) prevBtn.style.display = 'none';
+        if (nextBtn) nextBtn.style.display = 'none';
         return;
-    }
+      }
 
-    const items = carousel.querySelectorAll("[data-carousel-item]");
-    const nextBtn = carousel.querySelector("[data-carousel-next]");
-    const prevBtn = carousel.querySelector("[data-carousel-prev]");
-    const indicators = carousel.querySelectorAll("[data-carousel-slide-to]");
+      let index = 0;
+      let interval = null;
+      const INTERVAL_MS = 4000;
 
-    let currentIndex = [...items].findIndex((item: Element) => item.getAttribute("data-carousel-item") === "active");
-    if (currentIndex === -1) currentIndex = 0;
+      // crear puntos
+      slides.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'w-3 h-3 rounded-full bg-white/40 cursor-pointer';
+        dot.setAttribute('aria-label', `Ir a la diapositiva ${i + 1}`);
+        dot.dataset.index = String(i);
+        dotsContainer.appendChild(dot);
+      });
 
-    function showSlide(index: number) {
-        // ocultar todos
-        items.forEach((item, i: number) => {
-            if (i === index) {
-                item.classList.remove("hidden");
-                item.setAttribute("data-carousel-item", "active");
-            } else {
-                item.classList.add("hidden");
-                item.setAttribute("data-carousel-item", "");
-            }
+      const dots = Array.from(dotsContainer.children);
+
+      function updateDots() {
+        dots.forEach(d => d.classList.remove('bg-white'));
+        if (dots[index]) dots[index].classList.add('bg-white');
+      }
+
+      function updateCarousel() {
+        // transform con porcentaje
+        track.style.transform = `translateX(-${index * 100}%)`;
+        updateDots();
+      }
+
+      function nextSlide() {
+        index = (index + 1) % slides.length;
+        updateCarousel();
+      }
+
+      function prevSlide() {
+        index = (index - 1 + slides.length) % slides.length;
+        updateCarousel();
+      }
+
+      function startAuto() {
+        stopAuto();
+        interval = setInterval(nextSlide, INTERVAL_MS);
+      }
+
+      function stopAuto() {
+        if (interval) {
+          clearInterval(interval);
+          interval = null;
+        }
+      }
+
+      // listeners flechas
+      if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+          nextSlide();
+          startAuto();
         });
+      }
 
-        // actualizar indicadores
-        indicators.forEach((ind: Element, i: number) => {
-            ind.setAttribute("aria-current", i === index ? "true" : "false");
+      if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+          prevSlide();
+          startAuto();
         });
+      }
 
-        currentIndex = index;
-    }
-
-    // Botón siguiente
-    nextBtn?.addEventListener("click", () => {
-        const nextIndex = (currentIndex + 1) % items.length;
-        showSlide(nextIndex);
-    });
-
-    // Botón anterior
-    prevBtn?.addEventListener("click", () => {
-        const prevIndex = (currentIndex - 1 + items.length) % items.length;
-        showSlide(prevIndex);
-    });
-
-    // Indicadores (puntitos)
-    indicators.forEach((indicator: Element) => {
-        indicator.addEventListener("click", () => {
-            const slideToAttr = indicator.getAttribute("data-carousel-slide-to");
-            if (slideToAttr !== null) {
-                const index = parseInt(slideToAttr, 10);
-                showSlide(index);
-            }
+      // listeners puntos
+      dots.forEach(dot => {
+        dot.addEventListener('click', (e) => {
+          const target = e.currentTarget;
+          const i = parseInt(target.dataset.index, 10);
+          if (!Number.isNaN(i)) {
+            index = i;
+            updateCarousel();
+            startAuto();
+          }
         });
+      });
+
+      // pausa al hover
+      root.addEventListener('mouseenter', stopAuto);
+      root.addEventListener('mouseleave', startAuto);
+
+      // soporte touch: touchstart, touchmove, touchend
+      let startX = 0;
+      let deltaX = 0;
+
+      root.addEventListener('touchstart', (e) => {
+        stopAuto();
+        if (e.touches && e.touches.length > 0) {
+          startX = e.touches[0].clientX;
+          deltaX = 0;
+        }
+      }, {passive: true});
+
+      root.addEventListener('touchmove', (e) => {
+        if (e.touches && e.touches.length > 0) {
+          deltaX = e.touches[0].clientX - startX;
+        }
+      }, {passive: true});
+
+      root.addEventListener('touchend', () => {
+        const threshold = 50; // px
+        if (deltaX < -threshold) {
+          nextSlide();
+        } else if (deltaX > threshold) {
+          prevSlide();
+        }
+        startAuto();
+        startX = 0;
+        deltaX = 0;
+      });
+
+      // inicializar
+      updateCarousel();
+      startAuto();
+
+      // cleanup si el nodo se elimina (defensivo)
+      // (esto no siempre se necesita, pero ayuda en SPA o re-mounts)
+      const observer = new MutationObserver(() => {
+        if (!document.body.contains(root)) {
+          stopAuto();
+          observer.disconnect();
+        }
+      });
+      observer.observe(document.body, { childList: true, subtree: true });
     });
-});
-</script>
-
-
+  })();</script>

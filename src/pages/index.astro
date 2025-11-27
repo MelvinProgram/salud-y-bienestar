@@ -1,8 +1,8 @@
 ---
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
 // import ProductCard from '../components/ProductCard.astro';
 // import ArticleCard from "../components/ArticleCard.astro";
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 import Layout from '../layouts/Layout.astro';
 import '../styles/global.css';
 import type { ArticleEntry } from "../types/Article";
@@ -13,25 +13,44 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 // Obtener artículos y productos
 const allArticles: ArticleEntry[] = await getCollection("articles");
 const articlesSorted = allArticles.sort(
-  // (a, b) => b.data.date.getTime() - a.data.date.getTime()
+  (a, b) => b.data.date.getTime() - a.data.date.getTime()
 );
-const productList = await getCollection('products');
+// const productList = await getCollection('products');
 
-const imgFitness = [
-  '/assets/images/fitness1.png',
-  '/assets/images/fitness2.png',
-  '/assets/images/fitness3.png',
-  '/assets/images/fitness4.png',
+const imagesFitness = [
+    '/assets/images/fitness/fitness1.png',
+    '/assets/images/fitness/fitness2.png',
+    '/assets/images/fitness/fitness3.png',
+    '/assets/images/fitness/fitness4.png',
 ];
 
+const imagesSaludDigital = [
+    '/assets/images/saludDigital/salud-digital1.png',
+    '/assets/images/saludDigital/salud-digital2.png',
+    '/assets/images/saludDigital/salud-digital3.png',
+    '/assets/images/saludDigital/salud-digital4.png',
+];
 ---
 
 <Layout>
   <Header />
   <main class="flex flex-col justify-center py-12 px-4 sm:px-8">
-      <h1 class="text-3xl font-bold text-center mb-10 text-light">
+      <!-- <h1 class="text-3xl font-bold text-center mb-10 text-light">
           Los mejores productos para tu Bienestar en Casa
-      </h1>
+      </h1> -->
+
+      <SectionCard > 
+        <h1 class="text-[50px] text-primary font-bold mb-4">Bienvenidos a Logra Tú Wellness</h1>
+        <p class="text-lg text-dark opacity-90 mb-4">
+          En nuestro sitio encontrarás una cuidada selección de productos y herramientas diseñadas para mejorar tu salud y bienestar desde la comodidad de tu hogar.
+        </p>
+        <p class="text-lg text-dark opacity-90 mb-6">
+          Desde equipos de fitness hasta dispositivos de salud digital, nuestra misión es ayudarte a crear un entorno saludable y equilibrado sin salir de casa.
+        </p>
+        <!-- <a href="/categories" class="inline-block bg-primary hover:bg-secondary text-dark transition px-6 py-3 rounded-xl font-semibold">
+          Explorar categorías
+        </a> -->
+      </SectionCard>
 
       <!-- Secciones con paleta Neo-Wellness -->
       <SectionCard >
@@ -45,7 +64,8 @@ const imgFitness = [
         <a href="/categories/fitness" class="inline-block bg-primary hover:bg-secondary text-dark transition px-6 py-3 rounded-xl font-semibold">
           Ver herramientas recomendadas
         </a>
-        <Carrusel images={imgFitness} />
+        
+        <Carrusel images={imagesFitness} height="100%"/>
       </SectionCard>
 
       <SectionCard >
@@ -59,6 +79,7 @@ const imgFitness = [
         <a href="/categories/salud-digital" class="inline-block bg-primary hover:bg-secondary text-dark transition px-6 py-3 rounded-xl font-semibold">
           Explorar dispositivos
         </a>
+        <Carrusel images={imagesSaludDigital} height="100%" />
       </SectionCard>
 
       <SectionCard >
@@ -85,15 +106,16 @@ const imgFitness = [
         <a href="/categories/sueno" class="inline-block bg-primary hover:bg-secondary text-dark transition px-6 py-3 rounded-xl font-semibold">
           Optimiza tu descanso
         </a>
+        
       </SectionCard>
 
       <!-- Últimos artículos -->
-      <h1 class="text-2xl font-bold mb-6 text-light">Últimos artículos</h1>
+      <!-- <h1 class="text-2xl font-bold mb-6 text-light">Últimos artículos</h1>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mx-5">
-        <!-- {articlesSorted.map((article) => (
-          <ArticleCard {...article.data} slug={article.slug} />
-        ))} -->
-      </div>
+        {articlesSorted.map((article) => (
+          <ArticleCard {...article.data} slug={article.id} />
+        ))}
+      </div> -->
   </main>
   <Footer />
 </Layout>
