@@ -47,9 +47,9 @@ const { images = [], height = "100%" } = Astro.props;
     ❯
   </button>
 
-  <!-- Puntos -->
-  <div class="flex justify-center gap-2 absolute bottom-3 left-1/2 -translate-x-1/2" data-dots></div>
-</div>
+  <!-- contenedor de puntos -->
+  <!-- <div class="flex justify-center gap-2 absolute bottom-3 left-1/2 -translate-x-1/2" data-dots></div>  
+</div> -->
 
 <script type="module">
   (function () {
@@ -58,8 +58,8 @@ const { images = [], height = "100%" } = Astro.props;
 
     carousels.forEach((root) => {
       const track = root.querySelector('[data-carousel-track]');
-      const slides = track ? Array.from(track.children) : [];
-      const prevBtn = root.querySelector('[data-prev]');
+      const slides = track ? Array.from(track.children) : []; // todas las diapositivas
+      const prevBtn = root.querySelector('[data-prev]'); 
       const nextBtn = root.querySelector('[data-next]');
       const dotsContainer = root.querySelector('[data-dots]');
 
@@ -75,21 +75,40 @@ const { images = [], height = "100%" } = Astro.props;
       let interval = null;
       const INTERVAL_MS = 4000;
 
-      // crear puntos
-      slides.forEach((_, i) => {
+      // crear puntos (mostrar como máximo 4)
+      const MAX_DOTS = 4;
+      const visibleDots = Math.min(MAX_DOTS, slides.length);
+
+      // mapear como paginador: los puntos representan páginas (grupos de slides)
+      const dotToSlideIndices = [];
+      const groupSize = Math.ceil(slides.length / visibleDots);
+
+      for (let i = 0; i < visibleDots; i++) {
+        const mapped = Math.min(i * groupSize, slides.length - 1);
+        dotToSlideIndices.push(mapped);
+      }
+
+      dotToSlideIndices.forEach((slideIdx, i) => {
         const dot = document.createElement('button');
         dot.type = 'button';
         dot.className = 'w-3 h-3 rounded-full bg-white/40 cursor-pointer';
-        dot.setAttribute('aria-label', `Ir a la diapositiva ${i + 1}`);
-        dot.dataset.index = String(i);
+        dot.setAttribute('aria-label', `Ir a la página ${i + 1}`);
+        dot.dataset.dotIndex = String(i);
+        dot.dataset.slideIndex = String(slideIdx);
         dotsContainer.appendChild(dot);
       });
 
       const dots = Array.from(dotsContainer.children);
 
+      function findActiveDot() {
+        const active = Math.min(Math.floor(index / groupSize), visibleDots - 1);
+        return active;
+      }
+
       function updateDots() {
         dots.forEach(d => d.classList.remove('bg-white'));
-        if (dots[index]) dots[index].classList.add('bg-white');
+        const active = findActiveDot();
+        if (dots[active]) dots[active].classList.add('bg-white');
       }
 
       function updateCarousel() {
@@ -139,9 +158,9 @@ const { images = [], height = "100%" } = Astro.props;
       dots.forEach(dot => {
         dot.addEventListener('click', (e) => {
           const target = e.currentTarget;
-          const i = parseInt(target.dataset.index, 10);
-          if (!Number.isNaN(i)) {
-            index = i;
+          const slideIdx = parseInt(target.dataset.slideIndex, 10);
+          if (!Number.isNaN(slideIdx)) {
+            index = slideIdx;
             updateCarousel();
             startAuto();
           }
