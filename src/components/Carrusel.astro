@@ -1,5 +1,5 @@
 ---
-const { images = [], height = "100%" } = Astro.props;
+const { images = [], height = "50%"} = Astro.props;
 ---
 <style>
   /* estilos mínimos que no dependen de Tailwind build-time */
@@ -76,14 +76,6 @@ const { images = [], height = "100%" } = Astro.props;
       const INTERVAL_MS = 4000;
 
       // crear puntos
-      slides.forEach((_, i) => {
-        const dot = document.createElement('button');
-        dot.type = 'button';
-        dot.className = 'w-3 h-3 rounded-full bg-white/40 cursor-pointer';
-        dot.setAttribute('aria-label', `Ir a la diapositiva ${i + 1}`);
-        dot.dataset.index = String(i);
-        dotsContainer.appendChild(dot);
-      });
 
       const dots = Array.from(dotsContainer.children);
 
