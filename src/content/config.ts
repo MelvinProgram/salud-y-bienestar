@@ -13,7 +13,7 @@ const productsCollection = defineCollection({
     description: z.string(),
     image: z.string(),
     price: z.number(),
-    category: z.enum(["fitness", "nutricion", "salud-digital", "sueno"]),
+    category: z.enum(["fitness", "nutricion", "salud-digital", "sueño"]),
     amazonLink: z.string().url().optional(),
   }),
 });

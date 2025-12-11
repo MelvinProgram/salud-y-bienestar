@@ -2,34 +2,59 @@
 import type { Article } from "../types/Article";
 
 // Tipar props
-const props = Astro.props as Article;
+// const props = Astro.props as Article;
+
+// const imagesFitness = [
+//     '/assets/images/fitness/fitness1.png',
+//     '/assets/images/fitness/fitness2.png',
+//     '/assets/images/fitness/fitness3.png',
+//     '/assets/images/fitness/fitness4.png',
+// ];
+
+// const imagesSaludDigital = [
+//     '/assets/images/saludDigital/salud-digital1.png',
+//     '/assets/images/saludDigital/salud-digital2.png',
+//     '/assets/images/saludDigital/salud-digital3.png',
+//     '/assets/images/saludDigital/salud-digital4.png',
+// ];
 
 // Destructurar
-const { title, excerpt, image, date, category } = props;
+// const { title, excerpt, date, category } = props;
+
+// const images = (): string[] => {
+//   if (props.category === "Fitness") {
+//     return imagesFitness;
+//   } else if (props.category === "SaludDigital") {
+//     return imagesSaludDigital;
+//   } else {
+//     return ['/assets/images/default-directory/default.png'];
+//   }
+// };
+
 
 // Formatear fecha
-const formattedDate = date.toLocaleDateString("es-ES", {
-  year: "numeric",
-  month: "short",
-  day: "numeric",
-});
+// const formattedDate = date.toLocaleDateString("es-ES", {
+//   year: "numeric",
+//   month: "short",
+//   day: "numeric",
+// });
 ---
-<article class="bg-white border rounded-xl shadow-sm overflow-hidden hover:shadow-md transition">
+<!-- <article class="bg-white border rounded-xl shadow-sm overflow-hidden hover:shadow-md transition">
   <a href={`/articles/${props.slug}`} class="block">
     <img 
-      src={image}
+      src={images()[0]}
       alt={title}
       class="w-full h-40 object-cover"
       loading="lazy"
     />
-  </a>
+  </a> -->
 
-  <div class="p-4">
+  <!-- <div class="p-4">
     <span class="text-xs font-bold uppercase text-indigo-600 mb-1 block">
       {category}
     </span>
 
-    <a href={`/articles/${props.slug}`} class="block hover:text-indigo-700 transition duration-150">
+    <a href={`/articles/${props.slug}`} class="block text-indigo-700 hover:text-yellow-500 transition duration-150">
       <h3 class="font-semibold text-lg leading-tight mb-2">
         {title}
       </h3>
@@ -45,5 +70,5 @@ const formattedDate = date.toLocaleDateString("es-ES", {
         Leer Más →
       </a>
     </div>
-  </div>
+  </div> -->
 </article>
