@@ -1,5 +1,5 @@
 ---
-// import Carrusel from './Carrusel.astro';
+import Carrusel from './Carrusel.astro';
 
 const imagesNutricion = [
     '/assets/images/nutricion/nutricion1.png',
@@ -7,10 +7,13 @@ const imagesNutricion = [
     '/assets/images/nutricion/nutricion3.png',
     '/assets/images/nutricion/nutricion4.png',
 ];
+
+// const { height = "50%"} = Astro.props;
+
 ---
 <section class="py-20 px-6 max-w-5xl mx-auto animate-fadeIn bg-light text-dark rounded-2xl shadow-lg p-8 mb-10">
     <h2 id="nutricion" class="text-4xl text-primary font-bold mb-4">Nutrición</h2>
-    <!-- <Carrusel images={imagesNutricion} height="100%" /> -->
+    <Carrusel images={imagesNutricion} height="100%" />
     <p class="text-lg text-dark opacity-90 my-4">
         Lo que comes define tu energía, tu mente y tu bienestar a largo plazo. Una alimentación consciente puede transformar tu salud desde adentro hacia afuera.
     </p>
