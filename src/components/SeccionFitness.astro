@@ -40,33 +40,8 @@ const { height = "50%"} = Astro.props;
         <a href="/categories/fitness" class="inline-block bg-primary hover:bg-secondary text-dark transition px-6 py-3 rounded-xl font-semibold">
           Ver herramientas recomendadas
         </a>
-        <div class="carousel-container shadow-lg shadow-black/50 rounded-3xl mt-8"
-     style={`height: ${height}`}
-     data-carousel>
-    <div class="carousel-track" data-carousel-track>
-      {imagesFitness.map((img: string) => (
-        <img src={img} alt="slide" class="carousel-slide object-cover h-full" />
-      ))}
-    </div>
-
-    <!-- Flechas: uso clases Tailwind aquí para evitar @apply dentro de <style> -->
-    <button type="button"
-            aria-label="Anterior"
-            class="absolute top-1/2 -translate-y-1/2 bg-black/40 text-white p-2 rounded-full cursor-pointer hover:bg-black/60 transition left-3"
-            data-prev>
-      ❮
-    </button>
-
-    <button type="button"
-            aria-label="Siguiente"
-            class="absolute top-1/2 -translate-y-1/2 bg-black/40 text-white p-2 rounded-full cursor-pointer hover:bg-black/60 transition right-3"
-            data-next>
-      ❯
-    </button>
-
-  <!-- Puntos -->
-  <div class="flex justify-center gap-2 absolute bottom-3 left-1/2 -translate-x-1/2" data-dots></div>
-</div>
+        
+        <Carrusel images={imagesFitness} height="100%"/>
     <slot />
 </section>
 
