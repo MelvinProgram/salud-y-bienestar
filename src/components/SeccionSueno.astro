@@ -1,8 +1,17 @@
 ---
+import Carrusel from './Carrusel.astro'
+const imageSueno = [
+    "assets/images/sueno/sueno1.jpg",
+    "assets/images/sueno/sueno2.jpg",
+    "assets/images/sueno/sueno3.jpg",
+    "assets/images/sueno/sueno4.jpg",
+];
+
 ---
 <section class="py-20 px-6 max-w-5xl mx-auto animate-fadeIn bg-light text-dark rounded-2xl shadow-lg p-8 mb-10">
     <h2 id="sueno" class="text-4xl text-primary font-bold mb-4">Sueño</h2>
-    <p class="text-lg text-dark opacity-90 mb-4">
+    <Carrusel images={imageSueno} height="100%" />
+    <p class="text-lg text-dark opacity-90 mb-4 mt-4">
         Dormir bien es clave para tu rendimiento, tu estado emocional y tu salud. Un descanso adecuado fortalece tu sistema inmunológico y mejora tu equilibrio diario.
     </p>
     <p class="text-lg text-dark opacity-90 mb-6">
