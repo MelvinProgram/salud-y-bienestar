@@ -1,0 +1,40 @@
+---
+const {
+  title = "Salud y Bienestar",
+  description = "Consejos de salud, bienestar, fitness y salud digital.",
+  canonical = new URL(Astro.url.pathname, Astro.site),
+  image = "/images/og-default.jpg",
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- 🧠 SEO -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <!-- 🧭 Canonical -->
+    <link rel="canonical" href={canonical} />
+
+    <!-- 📸 Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content={canonical} />
+
+    <!-- 🐦 Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
