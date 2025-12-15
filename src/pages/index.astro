@@ -1,38 +1,37 @@
 ---
+// import ProductCard from '../components/ProductCard.astro';
+// import ArticleCard from "../components/ArticleCard.astro";
 import Header from '../components/Header.astro';
+import SeccionFitness from '../components/SeccionFitness.astro'
+import SeccionSaludDigital from '../components/SeccionSaludDigital.astro';
+import SeccionSueno from '../components/SeccionSueno.astro';
+import SeccionNutricion from '../components/SeccionNutricion.astro';
 import Footer from '../components/Footer.astro';
-import ProductCard from '../components/ProductCard.astro';
 import Layout from '../layouts/Layout.astro';
 import '../styles/global.css';
-
 import type { ArticleEntry } from "../types/Article";
-import ArticleCard from "../components/ArticleCard.astro";
+import SectionCard from '../components/SectionCard.astro';
+// import Carrusel from '../components/Carrusel.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
 
-// Obtener todos los artículos
+// Obtener artículos y productos
 const allArticles: ArticleEntry[] = await getCollection("articles");
-
-// Opcional: ordenar por fecha descendente
 const articlesSorted = allArticles.sort(
   (a, b) => b.data.date.getTime() - a.data.date.getTime()
 );
-
-// 1. IMPORTAR EL TIPO DE COLECCIÓN
-import { getCollection, type CollectionEntry } from 'astro:content';
-
-// 2. Obtener la colección de productos
-const productList = await getCollection('products');
+// const productList = await getCollection('products');
 ---
 
+
 <Layout>
-  <!-- La cabecera se está incluyendo dentro del Layout para un mejor control del diseño -->
   <Header />
   <h1 class="text-2xl font-bold mb-6">Últimos artículos</h1>
 
-  <!-- <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
     {articlesSorted.map((article) => (
       <ArticleCard {...article.data} slug={article.slug} />
     ))}
-  </div> -->
+  </div>
   
     <!-- <main class="flex flex-col justify-center py-12 px-4 sm:px-8">
             <h1 class="text-3xl font-bold text-center mb-10 text-gray-800">
@@ -55,4 +54,4 @@ const productList = await getCollection('products');
           </div>
     </main> -->
   <Footer />
-  </Layout>
+</Layout>

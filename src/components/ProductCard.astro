@@ -1,50 +1,8 @@
----
-import type { Product } from "../types/Product";
-
-const props = Astro.props as Product;
-
-const { title, description, image, price, category, amazonLink } = props;
----
-
-
-
-<article class="product-card bg-white border border-gray-200 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-  
-  <div class="image-container h-40 flex items-center justify-center p-4 bg-gray-50">
-    <img 
-      src={image} 
-      alt={`Imagen del producto: ${title}`} 
-      class="max-h-full max-w-full object-contain transition-transform duration-300 hover:scale-105"
-      loading="lazy"
-    />
-  </div>
-
-  <div class="content-body p-4">
-    <span class="text-xs font-semibold uppercase text-teal-600 mb-1 block">
-      {category.replace('-', ' ')}
-    </span>
-    
-    <h3 class="text-lg font-bold text-gray-900 leading-snug mb-2">
-      {title}
-    </h3>
-
-    <p class="text-sm text-gray-500 mb-4 h-12 overflow-hidden">
-      {description}
-    </p>
-
-    <p class="text-sm text-gray-500 mb-4">
-      {category}
-    </p>
-
-    🛒 Comprar en Amazon
-  </div>
-</article>
-
-<style>
-  .amazon-button {
-    background-color: #ff9900;
-  }
-  .amazon-button:hover {
-    background-color: #e68a00;
-  }
-</style>
+<div class="bg-white/10 border border-white/20 rounded-2xl p-6 shadow-xl backdrop-blur-md hover:scale-[1.02] transition grid gap-4 animate-fadeIn">
+  <img src="/placeholder.png" alt="Producto" class="rounded-xl w-full aspect-video object-cover">
+  <h3 class="text-2xl font-semibold">Nombre del producto</h3>
+  <p class="opacity-80 text-sm">Descripción breve del producto y sus beneficios principales.</p>
+  <a href="#" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl text-center font-semibold transition">
+  Ver en Amazon
+  </a>
+</div>

@@ -1,0 +1,28 @@
+---
+import Carrusel from './Carrusel.astro';
+const imagesFitness = [
+    '/assets/images/fitness/fitness1.png',
+    '/assets/images/fitness/fitness2.png',
+    '/assets/images/fitness/fitness3.png',
+    '/assets/images/fitness/fitness4.png',
+];
+
+// const { height = "50%"} = Astro.props; 
+---
+
+<section class="py-20 px-6 max-w-5xl mx-auto animate-fadeIn bg-light text-dark rounded-2xl shadow-lg p-8 mb-10">
+    <h2 id="fitness" class="text-4xl text-primary font-bold mb-4">Fitness</h2>
+    <Carrusel images={imagesFitness} height="100%" />
+        <p class="text-lg text-dark opacity-90 mt-4 mb-4">
+          Mantener tu cuerpo activo es esencial para mejorar tu energía, estado de ánimo y bienestar general. El sedentarismo afecta tu salud, pero con pequeños pasos desde casa puedes transformar por completo tu día a día.
+        </p>
+        <p class="text-lg text-dark opacity-90 mb-6">
+          No necesitas un gimnasio para empezar. Con rutinas simples y el equipo adecuado, puedes construir fuerza, flexibilidad y resistencia desde tu hogar.
+        </p>
+        <a href="/categories/fitness" class="inline-block bg-primary hover:bg-secondary text-dark transition px-6 py-3 rounded-xl font-semibold">
+          Ver herramientas recomendadas
+        </a>
+  <slot />
+</section>
+
+
