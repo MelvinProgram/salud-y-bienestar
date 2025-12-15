@@ -25,33 +25,37 @@ const articlesSorted = allArticles.sort(
 
 <Layout>
   <Header />
-  <h1 class="text-2xl font-bold mb-6">Últimos artículos</h1>
+  <main class="flex flex-col justify-center py-12 px-4 sm:px-8">
+      <!-- <h1 class="text-3xl font-bold text-center mb-10 text-light">
+          Los mejores productos para tu Bienestar en Casa
+      </h1> -->
 
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-    {articlesSorted.map((article) => (
-      <ArticleCard {...article.data} slug={article.slug} />
-    ))}
-  </div>
-  
-    <!-- <main class="flex flex-col justify-center py-12 px-4 sm:px-8">
-            <h1 class="text-3xl font-bold text-center mb-10 text-gray-800">
-                Los mejores productos para tu Bienestar en Casa
-            </h1>
-        
-            3. Contenedor de la cuadrícula de productos
-            Usaremos una cuadrícula responsiva de Tailwind para que se vea bien en todos los tamaños
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-items-center">
-            {productList.map((product: CollectionEntry<'products'>) => (
-            <ProductCard 
+      <SectionCard > 
+        <h1 class="text-[50px] text-primary font-bold mb-4">Bienvenidos a Logra Tú Wellness</h1>
+        <p class="text-lg text-dark opacity-90 mb-4">
+          En nuestro sitio encontrarás una cuidada selección de productos y herramientas diseñadas para mejorar tu salud y bienestar desde la comodidad de tu hogar.
+        </p>
+        <p class="text-lg text-dark opacity-90 mb-6">
+          Desde equipos de fitness hasta dispositivos de salud digital, nuestra misión es ayudarte a crear un entorno saludable y equilibrado sin salir de casa.
+        </p>
+        <!-- 
+          <a href="/categories" class="inline-block bg-primary hover:bg-secondary text-dark transition px-6 py-3 rounded-xl font-semibold">
+          Explorar categorías
+        </a> -->
+      </SectionCard>
+      <SeccionFitness />
+      <SeccionSaludDigital />
+      <SeccionNutricion />
+      <SeccionSueno />
+      <!-- Secciones con paleta Neo-Wellness -->
 
-              title={product.data.title} 
-              description={product.data.description}
-              image={product.data.image}
-              amazonLink={product.data.amazonLink}
-                        category={product.data.category}
-              />
-            ))}
-          </div>
-    </main> -->
+      <!-- Últimos artículos -->
+      <!-- <h1 class="text-2xl font-bold mb-6 text-light">Últimos artículos</h1>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mx-5">
+        {articlesSorted.map((article) => (
+          <ArticleCard {...article.data} slug={article.id} />
+        ))}
+      </div> -->
+  </main>
   <Footer />
 </Layout>
