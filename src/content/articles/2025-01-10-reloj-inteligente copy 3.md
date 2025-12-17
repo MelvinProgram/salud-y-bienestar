@@ -1,0 +1,8 @@
+---
+title: "Relojes inteligentes"
+date: 2025-01-10
+category: salud-digital
+description: "Descubre cómo elegir tu reloj inteligente"
+image: './assets/images/saludDigital/salud-digital1.jpg'
+---
+

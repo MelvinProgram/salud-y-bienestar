@@ -27,6 +27,21 @@ const imagesArray = (): string[] => {
     return imagesFitness;
   } else if (props.category === "SaludDigital") {
     return imagesSaludDigital;
+  } else if (props.category === "Nutrición") {
+    return [
+      '/assets/images/nutricion/nutricion1.jpg',
+      '/assets/images/nutricion/nutricion2.jpg',
+      '/assets/images/nutricion/nutricion3.jpg',
+      '/assets/images/nutricion/nutricion4.jpg',
+    ];
+  } else if (props.category === "Sueño") {
+    return [
+      '/assets/images/sueno/sueno1.jpg',
+      '/assets/images/sueno/sueno2.jpg',
+      '/assets/images/sueno/sueno3.jpg',
+      '/assets/images/sueno/sueno4.jpg',
+    ];
+
   } else {
     return [image]; // Imagen por defecto
   }
@@ -45,18 +60,10 @@ const formattedDate = date.toLocaleDateString("es-ES", {
     <img 
       src={imagesArray()["0"]}
       alt={title}
-      class="w-full h-40 object-cover"
+      class="w-full h-full object-ccover"
       loading="lazy"
     />
   </a>
-  <!-- <a href="#">
-    <img 
-      src={imagesArray()["0"]}
-      alt={title}
-      class="w-full h-40 object-cover"
-      loading="lazy"
-    />
-  </a> -->
 
   <div class="p-4">
     <span class="text-xs font-bold uppercase text-indigo-600 mb-1 block">

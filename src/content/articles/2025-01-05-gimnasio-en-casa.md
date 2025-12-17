@@ -4,6 +4,7 @@ date: 2025-01-05
 category: fitness
 description: "Guía práctica para crear tu propio espacio de entrenamiento sin gastar una fortuna"
 price: 150
+image: "./assets/images/fitness/fitness4.jpg"
 ---
 
 
