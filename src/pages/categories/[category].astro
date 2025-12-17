@@ -1,4 +1,5 @@
 ---
+
 // src/pages/categories/[category].astro
 import { getCollection } from 'astro:content';
 import type { ProductEntry } from '../../types/Product';
@@ -18,6 +19,13 @@ const allProducts: ProductEntry[] = await getCollection('products');
 const filteredProducts = allProducts.filter(
   (product) => product.data.category === category
 );
+
+const imagesFitness = [
+    '/assets/images/fitness/fitness1.jpg',
+    '/assets/images/fitness/fitness2.jpg',
+    '/assets/images/fitness/fitness3.jpg',
+    '/assets/images/fitness/fitness4.jpg',
+];
 ---
 
 <Layout title={`Categoria: ${category.toUpperCase()}`}>

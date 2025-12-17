@@ -2,54 +2,63 @@
 import type { Article } from "../types/Article";
 
 // Tipar props
-// const props = Astro.props as Article;
+const props = Astro.props as Article;
 
-// const imagesFitness = [
-//     '/assets/images/fitness/fitness1.png',
-//     '/assets/images/fitness/fitness2.png',
-//     '/assets/images/fitness/fitness3.png',
-//     '/assets/images/fitness/fitness4.png',
-// ];
+const imagesFitness = [
+    '/assets/images/fitness/fitness1.jpg',
+    '/assets/images/fitness/fitness2.jpg',
+    '/assets/images/fitness/fitness3.jpg',
+    '/assets/images/fitness/fitness4.jpg',
+];
 
-// const imagesSaludDigital = [
-//     '/assets/images/saludDigital/salud-digital1.png',
-//     '/assets/images/saludDigital/salud-digital2.png',
-//     '/assets/images/saludDigital/salud-digital3.png',
-//     '/assets/images/saludDigital/salud-digital4.png',
-// ];
+const imagesSaludDigital = [
+    '/assets/images/saludDigital/salud-digital1.jpg',
+    '/assets/images/saludDigital/salud-digital2.jpg',
+    '/assets/images/saludDigital/salud-digital3.jpg',
+    '/assets/images/saludDigital/salud-digital4.jpg',
+];
 
 // Destructurar
-// const { title, excerpt, date, category } = props;
+const { title, excerpt, date, category, image } = props;
+console.log('Categoría recibida:', category);
 
-// const images = (): string[] => {
-//   if (props.category === "Fitness") {
-//     return imagesFitness;
-//   } else if (props.category === "SaludDigital") {
-//     return imagesSaludDigital;
-//   } else {
-//     return ['/assets/images/default-directory/default.png'];
-//   }
-// };
+const imagesArray = (): string[] => {
+  if (props.category === "Fitness") {
+    return imagesFitness;
+  } else if (props.category === "SaludDigital") {
+    return imagesSaludDigital;
+  } else {
+    return [image]; // Imagen por defecto
+  }
+};
 
 
 // Formatear fecha
-// const formattedDate = date.toLocaleDateString("es-ES", {
-//   year: "numeric",
-//   month: "short",
-//   day: "numeric",
-// });
+const formattedDate = date.toLocaleDateString("es-ES", {
+  year: "numeric",
+  month: "short",
+  day: "numeric",
+});
 ---
-<!-- <article class="bg-white border rounded-xl shadow-sm overflow-hidden hover:shadow-md transition">
+<article class="bg-white border rounded-xl shadow-sm overflow-hidden hover:shadow-md transition">
   <a href={`/articles/${props.slug}`} class="block">
     <img 
-      src={images()[0]}
+      src={imagesArray()["0"]}
+      alt={title}
+      class="w-full h-40 object-cover"
+      loading="lazy"
+    />
+  </a>
+  <!-- <a href="#">
+    <img 
+      src={imagesArray()["0"]}
       alt={title}
       class="w-full h-40 object-cover"
       loading="lazy"
     />
   </a> -->
 
-  <!-- <div class="p-4">
+  <div class="p-4">
     <span class="text-xs font-bold uppercase text-indigo-600 mb-1 block">
       {category}
     </span>
@@ -70,5 +79,5 @@ import type { Article } from "../types/Article";
         Leer Más →
       </a>
     </div>
-  </div> -->
+  </div>
 </article>

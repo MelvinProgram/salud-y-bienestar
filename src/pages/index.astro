@@ -1,6 +1,6 @@
 ---
 // import ProductCard from '../components/ProductCard.astro';
-// import ArticleCard from "../components/ArticleCard.astro";
+import ArticleCard from "../components/ArticleCard.astro";
 import Header from '../components/Header.astro';
 import SeccionFitness from '../components/SeccionFitness.astro'
 import SeccionSaludDigital from '../components/SeccionSaludDigital.astro';
@@ -50,12 +50,12 @@ const articlesSorted = allArticles.sort(
       <!-- Secciones con paleta Neo-Wellness -->
 
       <!-- Últimos artículos -->
-      <!-- <h1 class="text-2xl font-bold mb-6 text-light">Últimos artículos</h1>
+      <h1 class="text-2xl font-bold mb-6 text-light">Últimos artículos</h1>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mx-5">
         {articlesSorted.map((article) => (
           <ArticleCard {...article.data} slug={article.id} />
         ))}
-      </div> -->
+      </div>
   </main>
   <Footer />
 </Layout>
