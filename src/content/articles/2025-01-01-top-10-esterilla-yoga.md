@@ -1,5 +1,5 @@
 ---
-title: "Estirilla para hacer Yoga"
+title: "Esterilla para hacer Yoga"
 date: 2025-01-01
 category: fitness
 description: "Comparativa de los mejores masajeadores para aliviar tensión en casa"

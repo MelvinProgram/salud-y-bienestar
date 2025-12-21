@@ -7,7 +7,7 @@ const { images = [], height = "50%"} = Astro.props;
      data-carousel>
   <div class="carousel-track" data-carousel-track>
     {images.map((img: string) => (
-      <img src={img} alt="slide" class="carousel-slide object-cover h-full" />
+      <img src={img} alt="slide" class="carousel-slide object-cover w-[100px] h-[100px]" />
     ))}
   </div>
 
